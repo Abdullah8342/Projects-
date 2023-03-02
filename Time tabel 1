@@ -1,0 +1,14 @@
+class Course:
+    def __init__(self, code, name, description, credit_hours):
+        self.code = code
+        self.name = name
+        self.description = description
+        self.credit_hours = credit_hours
+
+class Professor:
+    def __init__(self, name, email, phone_number, office_hours):
+        self.name = name
+        self.email = email
+        self.phone_number = phone_number
+        self.office_hours = office_hours
+
