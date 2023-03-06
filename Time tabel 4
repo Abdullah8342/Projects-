@@ -1,0 +1,44 @@
+class Course:
+    def __init__(self, code, name, description, credit_hours):
+        self.code = code
+        self.name = name
+        self.description = description
+        self.credit_hours = credit_hours
+
+class Professor:
+    def __init__(self, name, email, phone_number, office_hours):
+        self.name = name
+        self.email = email
+        self.phone_number = phone_number
+        self.office_hours = office_hours
+
+class Classroom:
+    def __init__(self, room_number, capacity):
+        self.room_number = room_number
+        self.capacity = capacity
+        self.availability = {}
+
+class TimeSlot:
+    def __init__(self, day, start_time, end_time):
+        self.day = day
+        self.start_time = start_time
+        self.end_time = end_time
+
+def add_course(courses):
+    code = input("Enter course code: ")
+    name = input("Enter course name: ")
+    description = input("Enter course description: ")
+    credit_hours = int(input("Enter course credit hours: "))
+    course = Course(code, name, description, credit_hours)
+    courses.append(course)
+    print("Course added successfully.")
+
+def add_professor(professors):
+    name = input("Enter professor name: ")
+    email = input("Enter professor email: ")
+    phone_number = input("Enter professor phone number: ")
+    office_hours = input("Enter professor office hours: ")
+    professor = Professor(name, email, phone_number, office_hours)
+    professors.append(professor)
+    print("Professor added successfully.")
+
