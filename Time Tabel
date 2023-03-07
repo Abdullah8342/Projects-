@@ -1,0 +1,86 @@
+class Course:
+    def __init__(self, code, name, description, credit_hours):
+        self.code = code
+        self.name = name
+        self.description = description
+        self.credit_hours = credit_hours
+
+class Professor:
+    def __init__(self, name, email, phone_number, office_hours):
+        self.name = name
+        self.email = email
+        self.phone_number = phone_number
+        self.office_hours = office_hours
+
+class Classroom:
+    def __init__(self, room_number, capacity):
+        self.room_number = room_number
+        self.capacity = capacity
+        self.availability = {}
+
+class TimeSlot:
+    def __init__(self, day, start_time, end_time):
+        self.day = day
+        self.start_time = start_time
+        self.end_time = end_time
+
+def add_course(courses):
+    code = input("Enter course code: ")
+    name = input("Enter course name: ")
+    description = input("Enter course description: ")
+    credit_hours = int(input("Enter course credit hours: "))
+    course = Course(code, name, description, credit_hours)
+    courses.append(course)
+    print("Course added successfully.")
+
+def add_professor(professors):
+    name = input("Enter professor name: ")
+    email = input("Enter professor email: ")
+    phone_number = input("Enter professor phone number: ")
+    office_hours = input("Enter professor office hours: ")
+    professor = Professor(name, email, phone_number, office_hours)
+    professors.append(professor)
+    print("Professor added successfully.")
+
+def add_classroom(classrooms):
+    room_number = input("Enter classroom number: ")
+    capacity = int(input("Enter classroom capacity: "))
+    classroom = Classroom(room_number, capacity)
+    classrooms.append(classroom)
+    print("Classroom added successfully.")
+
+def schedule_course(courses, professors, classrooms, timetable):
+    code = input("Enter course code: ")
+    professor_name = input("Enter professor name: ")
+    room_number = input("Enter classroom number: ")
+    day = input("Enter day of the week: ")
+    start_time = input("Enter start time (HH:MM): ")
+    end_time = input("Enter end time (HH:MM): ")
+
+    # Find course, professor, and classroom objects based on user input
+    course = next((c for c in courses if c.code == code), None)
+    professor = next((p for p in professors if p.name == professor_name), None)
+    classroom = next((c for c in classrooms if c.room_number == room_number), None)
+
+    # Check if the classroom is available during the specified time slot
+    if day in classroom.availability:
+        for ts in classroom.availability[day]:
+            if start_time >= ts.end_time or end_time <= ts.start_time:
+                continue
+            else:
+                print("Classroom not available during specified time slot.")
+                return
+    else:
+        classroom.availability[day] = []
+
+    # Check if the professor is available during the specified time slot
+    for ts in timetable:
+        if ts.day == day and professor.name == ts.professor.name:
+            if start_time >= ts.end_time or end_time <= ts.start_time:
+                continue
+            else:
+                print("Professor not available during specified time slot.")
+                return
+
+    # Schedule the course in the specified time slot and classroom, with the specified professor
+    time_slot = TimeSlot(day, start_time,
