@@ -1,3 +1,6 @@
+# NAME: ABDULLAH
+# ROLL NO: F22BSEEN1E02123
+
 class Course:
     def __init__(self, code, name, description, credit_hours):
         self.code = code
